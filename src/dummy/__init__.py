@@ -1,12 +1,22 @@
 import click
 
 @click.command()
-@click.argument('num-a',type=int, help='First number')
-@click.argument('num-b', type=int,help='Second number')
+@click.argument('nums',type=int, nargs=-1, help='First number')
 @click.option('--mul', is_flag=True, help='Enable multiplication')
-def main(num_a, num_b, mul) -> None:
+def main(nums, mul) -> None:
 
+    """Add list of nums or multiply them if --mul is specified."""
     if mul:
-        click.echo(num_a * num_b)
+        product = 1
+        
+        for n in nums:
+            product *= n 
+
+        click.echo(product)
     else:
-        click.echo(num_a + num_b)
+        sum = 0
+
+        for n in nums:
+            sum += n 
+
+        click.echo(sum)
