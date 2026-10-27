@@ -3,48 +3,54 @@ from click.testing import CliRunner
 
 def test_sum():
     runner = CliRunner()
-    result = runner.invoke(main, ['1', '2', '3'])
+    result = runner.invoke(main, ['1', '2', '3', '--op', 'sum'])
     assert result.exit_code == 0
     assert result.output.strip() == '6'
 
 def test_mul():
     runner = CliRunner()
-    result = runner.invoke(main, ['1', '2', '3', '--mul'])
+    result = runner.invoke(main, ['1', '2', '3', '--op', 'mul'])
     assert result.exit_code == 0
     assert result.output.strip() == '6'
 
-def test_no_args_sum():
+def test_min():
     runner = CliRunner()
-    result = runner.invoke(main, [])
-    assert result.exit_code == 0
-    assert result.output.strip() == '0'
-
-def test_no_args_mul():
-    runner = CliRunner()
-    result = runner.invoke(main, ['--mul'])
+    result = runner.invoke(main, ['1', '2', '3', '--op', 'min'])
     assert result.exit_code == 0
     assert result.output.strip() == '1'
 
-def test_invalid_args_sum():
+def test_max():
     runner = CliRunner()
-    result = runner.invoke(main, ['a', 'b', 'c'])
+    result = runner.invoke(main, ['1', '2', '3', '--op', 'max'])
+    assert result.exit_code == 0
+    assert result.output.strip() == '3'
+
+def test_no_args_sum():
+    runner = CliRunner()
+    result = runner.invoke(main, ["--op", 'sum'])
     assert result.exit_code == 2
     assert 'Error' in result.output
 
-def test_invalid_args_mul():
+def test_no_ops():
     runner = CliRunner()
-    result = runner.invoke(main, ['a', 'b', 'c', '--mul'])
+    result = runner.invoke(main, ["1","2","3"])
+    assert result.exit_code == 0
+    assert result.output.strip() == '6'  # Default operation is sum
+
+def test_invalid_op():
+    runner = CliRunner()
+    result = runner.invoke(main, ['1', '2', '3', '--op', 'invalid'])
     assert result.exit_code == 2
     assert 'Error' in result.output
 
-def test_invalid_ops():
+def test_invalid_args():
     runner = CliRunner()
-    result = runner.invoke(main, ['1', '2', '3', "--invalid"])
+    result = runner.invoke(main, ['a', 'b', 'c', '--op', 'sum'])
     assert result.exit_code == 2
     assert 'Error' in result.output
 
-def test_invalid_str():
+def test_float_args():
     runner = CliRunner()
-    result = runner.invoke(main, ['1', '2', '3', "4 5"])
-    assert result.exit_code == 2
-    assert 'Error' in result.output
+    result = runner.invoke(main, ['1.5', '2', '3.0', '--op', 'sum'])
+    assert result.exit_code == 0
+    assert result.output.strip() == '6.5'
