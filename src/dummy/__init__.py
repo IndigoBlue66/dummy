@@ -1,3 +1,5 @@
+import pathlib
+
 import click
 
 
@@ -7,7 +9,14 @@ import click
 @click.option("--mul", "ml", is_flag=True, default=False, help="Multiply numbers")
 @click.option("--min", "mn", is_flag=True, default=False, help="Find minimum")
 @click.option("--max", "mx", is_flag=True, default=False, help="Find maximum")
-def main(nums, ml, mn, mx) -> None:
+@click.option(
+    "--file",
+    "dest",
+    type=click.Path(exists=False, file_okay=True, dir_okay=False, writable=True, path_type=pathlib.Path),
+    default=None,
+    help="Result Destination",
+)
+def main(nums, ml, mn, mx, dest) -> None:
     """
     Apply operation to numbers. Adds by Default.
 
@@ -33,4 +42,12 @@ def main(nums, ml, mn, mx) -> None:
     if int(result) == result:
         result = int(result)
 
-    click.echo(result)
+    # write to file if specified
+
+    if dest:
+        dest.parent.mkdir(parents=True, exist_ok=True)
+
+        dest.write_text(str(result))
+
+    else:
+        click.echo(result)
