@@ -12,7 +12,7 @@ help:  ## [DEFAULT] Show this help
 
 
 .PHONY: all
-all:  ## Do everything taggged with [ALL] below
+all:  ## Do everything tagged with [ALL] below
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | grep "\[ALL\]" | grep -v "^all" | awk 'BEGIN {FS = ":.*?##"}; {printf "%s ", $$1}' | xargs make
 	@echo -e "\n    ${_GREEN}${_BOLD}PASS${_NORM}\n"
 

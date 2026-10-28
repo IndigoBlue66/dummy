@@ -4,21 +4,31 @@ import click
 # FDecorrator
 @click.command()
 @click.argument("nums", type=float, required=True, nargs=-1, help="numbers")
-@click.option("--op", type=click.Choice(["sum", "mul", "min", "max"]), default="sum", help="Operation to perform")
-def main(nums, op) -> None:
-    """Apply operation to numbers."""
-    match op:
-        case "sum":
-            result = sum(nums)
-        case "mul":
-            result = 1
-            for num in nums:
-                result *= num
+@click.option("--mul", "ml", is_flag=True, default=False, help="Multiply numbers")
+@click.option("--min", "mn", is_flag=True, default=False, help="Find minimum")
+@click.option("--max", "mx", is_flag=True, default=False, help="Find maximum")
+def main(nums, ml, mn, mx) -> None:
+    """
+    Apply operation to numbers. Adds by Default.
 
-        case "min":
-            result = min(nums)
-        case "max":
-            result = max(nums)
+    """
+
+    # opcode validation
+    if sum([ml, mn, mx]) > 1:
+        raise click.UsageError("Please specify exactly one operation.")
+
+    # perform operation
+
+    if mx:
+        result = max(nums)
+    elif mn:
+        result = min(nums)
+    elif ml:
+        result = 1
+        for num in nums:
+            result *= num
+    else:  # add (default)
+        result = sum(nums)
 
     if int(result) == result:
         result = int(result)
