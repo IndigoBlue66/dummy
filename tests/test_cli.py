@@ -12,28 +12,28 @@ def test_sum():
 
 def test_mul():
     runner = CliRunner()
-    result = runner.invoke(main, ["1", "2", "3", "--ml"])
+    result = runner.invoke(main, ["1", "2", "3", "--mul"])
     assert result.exit_code == 0
     assert result.output.strip() == "6"
 
 
 def test_min():
     runner = CliRunner()
-    result = runner.invoke(main, ["1", "2", "3", "--mn"])
+    result = runner.invoke(main, ["1", "2", "3", "--min"])
     assert result.exit_code == 0
     assert result.output.strip() == "1"
 
 
 def test_max():
     runner = CliRunner()
-    result = runner.invoke(main, ["1", "2", "3", "--mx"])
+    result = runner.invoke(main, ["1", "2", "3", "--max"])
     assert result.exit_code == 0
     assert result.output.strip() == "3"
 
 
 def test_no_args_sum():
     runner = CliRunner()
-    result = runner.invoke(main, ["--ml"])
+    result = runner.invoke(main, ["--mul"])
     assert result.exit_code == 2
     assert "Error" in result.output
 
@@ -47,7 +47,7 @@ def test_invalid_op():
 
 def test_multiple_ops():
     runner = CliRunner()
-    result = runner.invoke(main, ["1", "2", "3", "--ml", "--mn"])
+    result = runner.invoke(main, ["1", "2", "3", "--mul", "--min"])
     assert result.exit_code == 2
     assert "Error" in result.output
 

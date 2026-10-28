@@ -4,9 +4,9 @@ import click
 # FDecorrator
 @click.command()
 @click.argument("nums", type=float, required=True, nargs=-1, help="numbers")
-@click.option("--ml", is_flag=True, default=False, help="Multiply numbers")
-@click.option("--mn", is_flag=True, default=False, help="Find minimum")
-@click.option("--mx", is_flag=True, default=False, help="Find maximum")
+@click.option("--mul", "ml", is_flag=True, default=False, help="Multiply numbers")
+@click.option("--min", "mn", is_flag=True, default=False, help="Find minimum")
+@click.option("--max", "mx", is_flag=True, default=False, help="Find maximum")
 def main(nums, ml, mn, mx) -> None:
     """
     Apply operation to numbers. Adds by Default.
