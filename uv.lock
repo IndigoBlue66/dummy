@@ -26,6 +26,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
+    { name = "outputfile" },
 ]
 
 [package.dev-dependencies]
@@ -35,7 +36,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "click", specifier = ">=8.5.0" }]
+requires-dist = [
+    { name = "click", specifier = ">=8.5.0" },
+    { name = "outputfile", specifier = ">=1.4.0" },
+]
 
 [package.metadata.requires-dev]
 dev = [
@@ -50,6 +54,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/01/e1/2069291243c926a2ff1cd706c7f3eeb9b62144bf60f77c9fb9ff2fb26bd3/iniconfig-2.3.1.tar.gz", hash = "sha256:67f4b9c50da0dedf52af349e7749a80a9057a5031199791b906c3bb3ae878960", size = 21209, upload-time = "2026-10-06T22:48:38.076Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/56/43/4ca9e49d27a1fcf6bece6f6aec0ea46bb9112489b93d4b688fb415457bdb/iniconfig-2.3.1-py3-none-any.whl", hash = "sha256:9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7", size = 7552, upload-time = "2026-10-06T22:48:36.959Z" },
+]
+
+[[package]]
+name = "outputfile"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4c/85/b8a339f3400e1769fdfac0f4bc616518c8b5a6962ee7d37d002fdd8c11ea/outputfile-1.4.0.tar.gz", hash = "sha256:d2b6f9f0e866f04adc087348183d161b64b7ad2179b5d63c68a036d2ba70d025", size = 8470, upload-time = "2026-05-26T06:46:26.98Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cb/cc/bc134726c2aba527fa0085b7c5d3f5f189c00c51609b4cdc0a4cb7ce9535/outputfile-1.4.0-py3-none-any.whl", hash = "sha256:9fb3609f773ac1758cd5b3e5033e04c923b72b4ec8aec5a6f1615b32e3b006f7", size = 6498, upload-time = "2026-05-26T06:46:26.225Z" },
 ]
 
 [[package]]

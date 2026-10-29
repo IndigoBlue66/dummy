@@ -1,6 +1,7 @@
 import pathlib
 
 import click
+import outputfile
 
 
 # FDecorrator
@@ -47,7 +48,8 @@ def main(nums, ml, mn, mx, dest) -> None:
     if dest:
         dest.parent.mkdir(parents=True, exist_ok=True)
 
-        dest.write_text(str(result))
+        with outputfile.open_(dest, "w") as f:
+            f.write(str(result))
 
     else:
         click.echo(result)
